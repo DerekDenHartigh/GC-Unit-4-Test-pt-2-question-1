@@ -38,19 +38,14 @@ angular
 .module('BudgetApp')  
 .component('budget', {
     template: `
-    <!--
-    render a form that allows the user to enter the name of an expense 
-    and how much money they spent on it. This form will use ngSubmit to 
-    pass the data to the controller. 
---> 
-<!-- <form ng-form="budgetForm"> -->
-<div>
-    <label>Expense: <input type="text" ng-model="expense"></label>
-    <label>cost: $<input type="number" min="0.01" step="0.01" ng-model="cost"></label>
-    <!-- <button ng-submit="$ctrl.addExpense(expense, cost);">Add Expense</button> -->
-    <button ng-click="$ctrl.addExpense(expense, cost);">Add Expense</button>
-<!-- </form> -->
-</div>
+    <form ng-submit="$ctrl.addExpense(expense, cost);">
+    <!-- <div> -->
+        <label>Expense: <input type="text" ng-model="expense"></label>
+        <label>cost: $<input type="number" min="0.01" step="0.01" ng-model="cost"></label>
+        <!-- <button ng-submit="$ctrl.addExpense(expense, cost);">Add Expense</button> -->
+        <button>Add Expense</button>
+    </form>
+    <!-- </div> -->
 <label>Filter Expenses: <input type="text" ng-model="$ctrl.search"></label>
 <br>
 <br>
