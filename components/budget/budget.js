@@ -4,6 +4,7 @@ function BudgetController(budgetService) {
     const ctrl = this;
     ctrl.service = budgetService;
     ctrl.expenseTotal = ctrl.service.expenseTotal;
+    ctrl.search;
 
     ctrl.addExpense = (expense, cost)=>{
         console.log(expense, cost)
@@ -50,11 +51,12 @@ angular
     <button ng-click="$ctrl.addExpense(expense, cost);">Add Expense</button>
 <!-- </form> -->
 </div>
+<label>Filter Expenses: <input type="text" ng-model="$ctrl.search"></label>
 <br>
 <br>
 <h1>Expenses:</h1>
 <ul>
-    <li ng-repeat="expense in $ctrl.service.expenseArray">{{expense.expenseKey}} {{expense.costKey}} <button ng-click="$ctrl.removeExpense(expense)">Delete</button></li>
+    <li ng-repeat="expense in $ctrl.service.expenseArray | filter:$ctrl.search">{{expense.expenseKey}} {{expense.costKey}} <button ng-click="$ctrl.removeExpense(expense)">Delete</button></li>
 </ul>
 <label>Total Expenses: {{$ctrl.service.expenseTotal}}</label>
     `,
