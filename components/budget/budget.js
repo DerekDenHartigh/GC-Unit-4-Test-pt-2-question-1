@@ -3,6 +3,7 @@
 function BudgetController(budgetService) {
     const ctrl = this;
     ctrl.service = budgetService;
+    ctrl.expenseTotal = ctrl.service.expenseTotal;
 
     ctrl.addExpense = (expense, cost)=>{
         console.log(expense, cost)
@@ -13,11 +14,21 @@ function BudgetController(budgetService) {
         ctrl.service.expenseArray.unshift(newExpense);
         console.log("modified expense array:")
         console.log(ctrl.service.expenseArray);
+        ctrl.totalExpenses();
     };
 
-    ctrl.deleteExpense = (expense)=>{
+    ctrl.removeExpense = (expense)=>{
         let index = ctrl.service.expenseArray.indexOf(expense);
         ctrl.service.expenseArray.splice(index, 1);
+        ctrl.totalExpenses();
+    }
+
+    ctrl.totalExpenses = ()=>{
+        ctrl.service.expenseTotal = 0;
+        ctrl.service.expenseArray.forEach(function(expense){
+            console.warn(expense.costKey);
+            ctrl.service.expenseTotal += expense.costKey;
+        })
     }
 
     }
@@ -43,8 +54,9 @@ angular
 <br>
 <h1>Expenses:</h1>
 <ul>
-    <li ng-repeat="expense in $ctrl.service.expenseArray">{{expense.expenseKey}} {{expense.costKey}} <button ng-click="$ctrl.deleteExpense(expense)">Delete</button></li>
+    <li ng-repeat="expense in $ctrl.service.expenseArray">{{expense.expenseKey}} {{expense.costKey}} <button ng-click="$ctrl.removeExpense(expense)">Delete</button></li>
 </ul>
+<label>Total Expenses: {{$ctrl.service.expenseTotal}}</label>
     `,
     // templateUrl: './budgetTemplate.html', // not sure why this aint working...
     controller: BudgetController

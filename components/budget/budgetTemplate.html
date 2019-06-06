@@ -18,3 +18,4 @@
     <li ng-repeat="expense in $ctrl.service.expenseArray">{{expense.expenseKey}} {{expense.costKey}}</li>
     <button ng-click="$ctrl.deleteExpense(expense)">Delete</button>
 </ul>
+<label>Total Expenses: {{$ctrl.service.ExpenseTotal}}</label>
